@@ -4,13 +4,13 @@
     justify-content: center; 
     gap: 40px; 
     padding: 20px; 
-    box-sizing: border-box; /* Evita que el padding rompa el ancho total */
+    box-sizing: border-box; 
 }
 
 .header {
     width: 50%;    
     text-align: center;
-    margin: 20px auto; /* Centra el header arriba */
+    margin: 20px auto; 
     padding: 20px;
 }
 
