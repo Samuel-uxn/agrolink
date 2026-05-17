@@ -1,0 +1,58 @@
+.container {
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    padding: 20px; 
+    box-sizing: border-box; /* Evita que el padding rompa el ancho total */
+}
+
+.header {
+    width: 50%;    
+    text-align: center;
+    margin: 20px auto; /* Centra el header arriba */
+    padding: 20px;
+}
+
+.registro {
+    border: 1px solid rgb(109, 108, 108);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%; 
+    padding: 20px;
+    border-radius: 13px;
+}
+.registro button {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid rgb(177, 169, 169);
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.iniciarSecion {
+    border: 1px solid rgb(109, 108, 108);
+    width: 45%; 
+    padding: 20px;
+    border-radius: 13px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.iniciarSecion button{
+    width: 75%;
+    padding: 10px;
+    border: 1px solid rgb(177, 169, 169);
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.iniciarSecion input{
+    width: 75%;
+    padding: 10px;
+    border: 1px solid rgb(177, 169, 169);
+    border-radius: 10px;
+    cursor: pointer;
+}
