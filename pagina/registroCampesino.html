@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Campesino</title>
+    <link rel="stylesheet" href="../estilos/estilos.css">
+</head>
+<body>
+    <div class="registroCampesino">
+    <h2>Registro Campesino</h2>
+    <label for="nombre">Nombre Completo:</label>
+    <input type="text" id="nombre" name="nombre" required placeholder="Nombre y Apellidos">
+    <div class="CyT">
+        <div class="cedulaTelefono">
+            <label for="cedula">Cédula:</label>
+            <input type="text" id="cedula" name="cedula" required>
+        </div>
+        <div class="cedulaTelefono">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
+        </div>
+    </div>
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" name="direccion" required placeholder="Vereda, sector o direccion">
+    <label for="correo">Correo Electrónico:</label>
+    <input type="email" id="correo" name="correo" placeholder="Opcional">
+    <div class="LyD">
+        <div class="depaMuni">
+            <label for="departamento">Departamento:</label>
+            <select id="departamento">
+                <option value="">Seleccione un departamento</option>
+                <option value="cundinamarca">Cundinamarca</option>
+                <option value="valle">Boyacá</option>
+            </select>
+        </div>
+        <div class="depaMuni">
+            <label for="municipio">Municipio:</label>
+            <select id="municipio">
+                <option value="">Seleccione un municipio</option>
+                <option value="1">Fusagasugá</option>
+                <option value="2">Arbeláez</option>
+                <option value="3">Silvania</option>
+                <option value="4">Tunja</option>
+                <option value="5">Duitama</option>
+                <option value="6">Sogamoso</option>
+            </select>
+        </div>
+    </div>
+    <div class="Contraseña">
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" name="contraseña" required>
+    </div>
+    <div class="botones">
+<button id="btnRegistrar">Registrar</button>
+    <button onclick="window.location.href='../pagina/index.html'">Volver</button>
+    </div>
+    </div>
+    <script src="../script/script.js"></script>
+</body>
+</html>

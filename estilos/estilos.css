@@ -56,3 +56,58 @@
     border-radius: 10px;
     cursor: pointer;
 }
+.opcion {
+    border: 2px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.opcion.activo {
+    border-color: green;
+    background: #eaf3de;
+}
+.CyT{
+    display: flex;
+}
+.LyD{
+    display: flex;
+}
+.registroCampesino{
+    display: flex;
+    flex-direction: column;
+    
+    border: 1px solid rgb(231, 227, 227);
+    border-radius: 19px;
+    width: 40%;
+    padding: 40px;
+    margin: 40px auto;
+}
+.registroCampesino input{
+    width: 50%;
+    padding: 8px;
+    border: 1px solid rgb(177, 169, 169);
+    border-radius: 10px;
+    margin: 8px 0;
+}
+.depaMuni select{
+    width: 50%;
+    padding: 8px;
+    border: 1px solid rgb(177, 169, 169);
+    border-radius: 10px;
+    margin: 8px 0;
+}
+.botones{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.botones button{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid rgb(177, 169, 169);
+    border-radius: 10px;
+    cursor: pointer;
+}
