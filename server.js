@@ -3,9 +3,10 @@ const mysql2 = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
-
+const path = require('path');
+app.use(express.static(path.join(__dirname, '')));
 // conexión a la base de datos
 const db = mysql2.createConnection({
     host: 'localhost',
@@ -22,6 +23,7 @@ db.connect(function(err) {
     console.log('Conectado a la base de datos');
 });
 //ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+//registro pál campesino
 app.post('/api/registro/campesino', function(req, res) {
     var cedula = req.body.cedula;
     var nombre = req.body.nombre;
@@ -41,7 +43,25 @@ app.post('/api/registro/campesino', function(req, res) {
         res.json({ mensaje: 'Campesino registrado exitosamente' });
     });
 });
+//registro de administrador
+app.post('/api/registro/admin', function(req,res){
+    var nombre = req.body.nombre;
+    var email = req.body.correo;
+    var contraseña = req.body.contraseña;
+
+    var sql = 'INSERT INTO ADMINISTRADOR (nombre, email, password_hash) VALUES (?,?,?)';
+
+    db.query(sql, [nombre, email, contraseña], function(err, result){
+        if (err){
+            res.json({error: err.message});
+            return;
+        }
+        res.json({mensaje: 'Administrador registrado exitosamente'});
+    });
+});
+
 
 app.listen(3000, function() {
     console.log('Servidor corriendo en puerto 3000');
+    console.log('Abre: http://localhost:3000/pagina/index.html');
 });

@@ -73,7 +73,7 @@
 .LyD{
     display: flex;
 }
-.registroCampesino{
+.registros{
     display: flex;
     flex-direction: column;
     
@@ -83,7 +83,7 @@
     padding: 40px;
     margin: 40px auto;
 }
-.registroCampesino input{
+.registros input{
     width: 50%;
     padding: 8px;
     border: 1px solid rgb(177, 169, 169);

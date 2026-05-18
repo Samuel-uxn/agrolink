@@ -21,12 +21,14 @@ function continuar() {
     if (texto == 'Campesino') {
         window.location.href = 'registroCampesino.html';
     } else if (texto == 'Administrador') {
-        window.location.href = 'registro_admin.html';
+        window.location.href = 'registroAdmin.html';
     }
 
 }
-document.getElementById('btnRegistrar').addEventListener('click', function() {
-    var datos = {
+var btnCampesino = document.getElementById('btnRegistrar');
+if (btnCampesino) {
+    btnCampesino.addEventListener('click', function() {    
+        var datos = {
         cedula: document.getElementById('cedula').value,
         nombre: document.getElementById('nombre').value,
         telefono: document.getElementById('telefono').value,
@@ -51,3 +53,30 @@ document.getElementById('btnRegistrar').addEventListener('click', function() {
         }
     });
 });
+}
+//evento de registro pal admin
+var btnAdmin = document.getElementById('btnRegistrarAdmin');
+if (btnAdmin) {
+    btnAdmin.addEventListener('click', function() {    
+        var datos = {
+        nombre: document.getElementById('nombre').value,
+        correo: document.getElementById('correo').value,
+        contraseña: document.getElementById('contraseña').value
+    };
+    fetch('http://localhost:3000/api/registro/admin',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(datos)
+
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(data){
+        if (data.error){
+            alert('Error: ' + data.error);
+        } else {
+            alert(data.mensaje);
+            window.location.href = '../pagina/index.html';
+        }
+    });
+    });
+}

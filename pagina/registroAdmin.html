@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <title>Registro Admin</title>
+</head>
+<body>
+    <div class="registros">
+        <div class="r1">
+            <h2>Registro Administrador</h2>
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Nombre y Apellidos">
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" required placeholder="Correo Electrónico">
+            <div class="Contraseña">
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+            </div>
+        </div>
+        <div class="botones">
+            <button id="btnRegistrarAdmin">Registrar</button>
+            <button onclick="window.location.href='../pagina/index.html'">Volver</button>    
+    </div>
+    </div>
+  <script src="../script/script.js"></script>
+</body>
+</html>
