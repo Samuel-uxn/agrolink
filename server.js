@@ -59,7 +59,37 @@ app.post('/api/registro/admin', function(req,res){
         res.json({mensaje: 'Administrador registrado exitosamente'});
     });
 });
+//inicio de secion del campe, el admin y el proadmin
+app.post('/api/login', function(req,res){
+    var usuario = req.body.usuario;
+    var contraseña = req.body.contraseña;
 
+    var sqlCampesino = 'SELECT * FROM  CAMPESINO WHERE cedula = ? AND password_hash = ?';
+    db.query(sqlCampesino, [usuario, contraseña], function(err, resultado){
+        if(err){
+            res.json({error: err.message});
+            return;
+        }
+
+        if(resultado.length > 0){
+            res.json({ rol: 'campesino' });
+            return;
+        } 
+
+    var sqlAdmin = 'SELECT * FROM ADMINISTRADOR WHERE email = ? AND password_hash = ?';
+    db.query(sqlAdmin, [usuario, contraseña], function(err, resultado){
+        if(err){
+            res.json({error: err.message});
+            return;
+        }
+        if(resultado.length>0){
+            res.json({rol: resultado[0].rol});
+            return;
+        }
+        return res.json({error: 'Usuario o contraseña incorrectos'});
+    });
+});
+});
 
 app.listen(3000, function() {
     console.log('Servidor corriendo en puerto 3000');

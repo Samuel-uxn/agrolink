@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+.sidebar {
+    background-color: #a8e3b5;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+}
+
+.sidebar a {
+    display: block;
+    padding: 8px 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main {
+    margin-left: 200px;
+    padding: 1.5rem;
+    width: 100%;
+}

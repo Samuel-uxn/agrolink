@@ -80,3 +80,29 @@ if (btnAdmin) {
     });
     });
 }
+//boton de inicio de sesion
+var btnLogin = document.getElementById('btnLogin');
+if(btnLogin){
+    btnLogin.addEventListener('click', function(){
+        var usuario = document.getElementById('loginUser').value;
+        var contraseña = document.getElementById('loginPassword').value;
+
+    fetch('http://localhost:3000/api/login',{
+        method: 'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({usuario: usuario, contraseña: contraseña})
+        })
+        .then(function(res){return res.json();})
+        .then(function(data){
+            if(data.error){
+                alert('Error: '+data.error);
+            }else if(data.rol =='campesino'){
+                window.location.href='../pagina/campesino.html';
+            }else if(data.rol == 'admin'){
+                window.location.href = '../pagina/admin.html';
+            }else if(data.rol == 'superadmin'){
+                window.location.href = '../pagina/superadmin.html';
+            }
+        });
+    });
+}

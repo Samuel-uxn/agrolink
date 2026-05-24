@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/estiloCampesino.css">
+</head>
+    <title>Document</title>
+</head>
+<body>
+<div class="sidebar">
+    <h2>AgroLink Admin</h2>
+    <a href="#" onclick="mostrarSeccion('dashboard')">Dashboard</a>
+    <a href="#" onclick="mostrarSeccion('productos')">Productos</a>
+    <a href="#" onclick="mostrarSeccion('proveedores')">Proveedores</a>
+    <a href="#" onclick="mostrarSeccion('pedidos')">Pedidos</a>
+    <a href="#" onclick="mostrarSeccion('inventario')">Inventario</a>
+    <a href="#" onclick="mostrarSeccion('municipios')">Municipios</a>
+    <a href="/pagina/index.html">Cerrar sesión</a>
+</div>
+<div class="main">
+    <div id="dashboard"><!-- contenido dashboard --></div>
+    <div id="productos" style="display:none"><!-- contenido productos --></div>
+    <div id="proveedores" style="display:none"><!-- contenido proveedores --></div>
+    <div id="pedidos" style="display:none"><!-- contenido pedidos --></div>
+    <div id="inventario" style="display:none"><!-- contenido inventario --></div>
+    <div id="municipios" style="display:none"><!-- contenido municipios --></div>
+</div>
+</body>
+</html>
