@@ -27,3 +27,45 @@
     padding: 1.5rem;
     width: 100%;
 }
+
+.cartaPanel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.carta {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 9%}
+
+.carta .numero {
+    font-size: 24px;
+    font-weight: bold;
+}
+.seccion{
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.seccion-header{
+    margin-bottom: 16px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+th{
+    text-align:left;
+    padding:8px;
+    border-bottom:2px solid #ddd;
+}
+td{
+    padding:8px;
+    border-bottom:1px solid #ddd;
+}

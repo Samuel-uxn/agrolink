@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/estiloCampesino.css">
-</head>
     <title>Document</title>
 </head>
 <body>
 <div class="sidebar">
     <h2>AgroLink Admin</h2>
-    <a href="#" onclick="mostrarSeccion('dashboard')">Dashboard</a>
+    <a href="#" onclick="mostrarSeccion('panel')">Panel</a>
     <a href="#" onclick="mostrarSeccion('productos')">Productos</a>
     <a href="#" onclick="mostrarSeccion('proveedores')">Proveedores</a>
     <a href="#" onclick="mostrarSeccion('pedidos')">Pedidos</a>
@@ -19,12 +18,59 @@
     <a href="/pagina/index.html">Cerrar sesión</a>
 </div>
 <div class="main">
-    <div id="dashboard"><!-- contenido dashboard --></div>
-    <div id="productos" style="display:none"><!-- contenido productos --></div>
-    <div id="proveedores" style="display:none"><!-- contenido proveedores --></div>
-    <div id="pedidos" style="display:none"><!-- contenido pedidos --></div>
-    <div id="inventario" style="display:none"><!-- contenido inventario --></div>
-    <div id="municipios" style="display:none"><!-- contenido municipios --></div>
+    <div id="panel"><h1>Panel</h1>
+        <div class="cartaPanel">
+            <div class="carta">
+                <p class="numero" id="totalProductos">0</p>
+                <p class="etiqueta">Productos Activos</p>
+            </div>
+            <div class="carta">
+                <p class="numero" id="totalPedidos">0</p>  
+                <p class="etiqueta">Pedidos pendientes</p>
+            </div>
+            <div class="carta">
+                <p class="numero" id="totalProveedores">0</p>
+                <p class="etiqueta">Proovedores Activos</p>
+            </div>
+            <div class="carta">
+               <p class="numero" id="stockBajo">0</p>
+               <p class="etiqueta">Stock bajo</p> 
+            </div>
+        </div>
+
+        <div class="seccion">
+            <div class="seccion-header">
+                <h3>Pedidios Recientes</h3>
+            </div>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Campesino</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                </tr>
+            </table>
+        </div>
+        <div class="seccion">
+            <div class="seccion-header">
+                <h3>Productos con Stock Bajo</h3>
+            </div>
+            <table>
+                <tr> 
+                    <th>Producto</th>
+                    <th>Stock Actual</th>
+                    <th>Stock Mínimo</th>  
+                    <th>Proveedor</th>  
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="productos" style="display:none"><h1>Productos</h1></div>
+    <div id="proveedores" style="display:none"><h1>Proveedores</h1></div>
+    <div id="pedidos" style="display:none"><h1>Pedidos</h1></div>
+    <div id="inventario" style="display:none"><h1>Inventario</h1></div>
+    <div id="municipios" style="display:none"><h1>Municipios</h1></div>
 </div>
+<script src="../script/script.js"></script>
 </body>
 </html>

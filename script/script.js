@@ -106,3 +106,22 @@ if(btnLogin){
         });
     });
 }
+//click del menu del administrador
+function mostrarSeccion(seccion){
+    document.querySelectorAll('.main div').forEach(function(div){
+        div.style.display = 'none';
+    });
+    document.getElementById(seccion).style.display = 'block';
+}
+//conectar las catarts de el admin 
+function cargarResumen(){
+    fetch('http://localhost:3000/api/resumen')
+    .then(function(res){return res.json();})
+    .then(function(data){
+        document.getElementById('totalProductos').textContent=data.productos;
+        document.getElementById('totalPedidos').textContent=data.pedidos;
+        document.getElementById('totalProveedores').textContent=data.proveedores;
+        document.getElementById('stockBajo').textContent=data.stockBajo;
+    });
+}
+cargarResumen();

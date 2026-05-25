@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, '')));
 const db = mysql2.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123456', // cámbiala por la tuya
+    password: '123456', 
     database: 'agrolink_db'
 });
 
@@ -90,7 +90,30 @@ app.post('/api/login', function(req,res){
     });
 });
 });
+//datos para llenar las tablas de Pedido
+//y productos en admin
+app.get('api/admin/resumen', function(req,res){
+    var resumen={};
 
+    db.query('SELECT COUNT(*) AS total FROM PRODUCTO WHERE activo = 1', function(err,resultado){
+        resumen.productos = resultado[0].total;
+    
+    db.query("SELECT COUNT(*) AS total FROM PEDIDO_INDIVIDUAL WHERE estado = 'pendiente'", function(err, resultado){
+        resumen.pedidos=resultado[0].total;
+
+        db.query("SELECT COUT(*) AS total FROM PROVEEDOR WHERE estado = 'activo'", function(err, resultado){
+            resumen.proveedores=resultado[0].total;
+            
+            db.query('SELECT COUNT(*) AS total FROM INVENTARIO_BODEGA WHERE stock < stock_minimo', function(err,resultado){
+                resumen.stockBajo=resultado[0].total;
+
+                res.json(resumen);
+            });
+        });
+    });
+    });
+        
+});
 app.listen(3000, function() {
     console.log('Servidor corriendo en puerto 3000');
     console.log('Abre: http://localhost:3000/pagina/index.html');
