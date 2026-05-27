@@ -115,7 +115,7 @@ function mostrarSeccion(seccion){
 }
 //conectar las catarts de el admin 
 function cargarResumen(){
-    fetch('http://localhost:3000/api/resumen')
+    fetch('http://localhost:3000/api/admin/resumen')
     .then(function(res){return res.json();})
     .then(function(data){
         document.getElementById('totalProductos').textContent=data.productos;
@@ -125,3 +125,60 @@ function cargarResumen(){
     });
 }
 cargarResumen();
+//recibir datos del server pa llenar las tablas
+function cargarPedidosRecientes(){
+    fetch('http://localhost:3000/api/admin/pedidos/recientes')
+    .then(function(res){return res.json();})
+    .then(function(data){
+        var tabla=document.getElementById('tablaPedidos');
+        tabla.innerHTML='';
+        data.forEach(function(pedido){
+            tabla.innerHTML+='<tr>'+
+            '<td>'+pedido.id_pedido+'</td>'+
+            '<td>'+pedido.nombre_completo+'</td>'+
+            '<td>'+pedido.estado+'</td>'+
+            '<td>'+pedido.estado_pago+'</td>'+
+            '</tr>';
+        });
+    });
+}
+cargarPedidosRecientes();
+// cargar categorias y proveedores para los selects
+app.get('/api/admin/categorias', function(req, res) {
+    db.query('SELECT * FROM CATEGORIA_PRODUCTO', function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+app.get('/api/admin/proveedores', function(req, res) {
+    db.query('SELECT * FROM PROVEEDOR WHERE estado = "activo"', function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+// agregar producto
+app.post('/api/admin/producto', function(req, res) {
+    var nombre = req.body.nombre;
+    var precio = req.body.precio;
+    var unidad = req.body.unidad;
+    var cantMin = req.body.cantMin;
+    var id_categoria = req.body.id_categoria;
+    var id_proveedor = req.body.id_proveedor;
+
+    var sql = 'INSERT INTO PRODUCTO (nombre, precio_actual, unidad_medida, cantidad_min_compra, id_categoria, id_proveedor) VALUES (?,?,?,?,?,?)';
+    db.query(sql, [nombre, precio, unidad, cantMin, id_categoria, id_proveedor], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Producto agregado exitosamente'});
+    });
+});
+
+// listar productos
+app.get('/api/admin/productos', function(req, res) {
+    var sql = 'SELECT P.id_producto, P.nombre, P.precio_actual, P.unidad_medida, C.nombre as categoria, PR.razon_social as proveedor FROM PRODUCTO P JOIN CATEGORIA_PRODUCTO C ON P.id_categoria = C.id_categoria JOIN PROVEEDOR PR ON P.id_proveedor = PR.id_proveedor';
+    db.query(sql, function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});

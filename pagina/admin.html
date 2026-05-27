@@ -49,6 +49,7 @@
                     <th>Estado</th>
                     <th>Pago</th>
                 </tr>
+                <tb id="tablaPedidos"></tb>
             </table>
         </div>
         <div class="seccion">
@@ -65,7 +66,40 @@
             </table>
         </div>
     </div>
-    <div id="productos" style="display:none"><h1>Productos</h1></div>
+    <div id="productos" style="display:none">
+    <h1>Productos</h1>
+        <div class="seccion">
+        <h3>Agregar producto</h3>
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="precioProducto" placeholder="Precio">
+        <input type="text" id="unidadProducto" placeholder="Unidad de medida (kg, litro...)">
+        <input type="number" id="cantMinProducto" placeholder="Cantidad mínima de compra">
+        <select id="categoriaProducto">
+            <option value="">Seleccione categoría</option>
+        </select>
+        <select id="proveedorProducto">
+            <option value="">Seleccione proveedor</option>
+        </select>
+        <button id="btnAgregarProducto">Agregar producto</button>
+    </div>
+
+    <div class="seccion">
+        <h3>Lista de productos</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Unidad</th>
+                <th>Categoría</th>
+                <th>Proveedor</th>
+            </tr>
+            <tbody id="tablaProductos"></tbody>
+        </table>
+    </div>
+    
+    </div>
+        
     <div id="proveedores" style="display:none"><h1>Proveedores</h1></div>
     <div id="pedidos" style="display:none"><h1>Pedidos</h1></div>
     <div id="inventario" style="display:none"><h1>Inventario</h1></div>

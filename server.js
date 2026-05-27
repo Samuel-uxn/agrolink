@@ -92,7 +92,7 @@ app.post('/api/login', function(req,res){
 });
 //datos para llenar las tablas de Pedido
 //y productos en admin
-app.get('api/admin/resumen', function(req,res){
+app.get('/api/admin/resumen', function(req,res){
     var resumen={};
 
     db.query('SELECT COUNT(*) AS total FROM PRODUCTO WHERE activo = 1', function(err,resultado){
@@ -101,7 +101,7 @@ app.get('api/admin/resumen', function(req,res){
     db.query("SELECT COUNT(*) AS total FROM PEDIDO_INDIVIDUAL WHERE estado = 'pendiente'", function(err, resultado){
         resumen.pedidos=resultado[0].total;
 
-        db.query("SELECT COUT(*) AS total FROM PROVEEDOR WHERE estado = 'activo'", function(err, resultado){
+        db.query("SELECT COUNT(*) AS total FROM PROVEEDOR WHERE estado = 'activo'", function(err, resultado){
             resumen.proveedores=resultado[0].total;
             
             db.query('SELECT COUNT(*) AS total FROM INVENTARIO_BODEGA WHERE stock < stock_minimo', function(err,resultado){
@@ -113,6 +113,53 @@ app.get('api/admin/resumen', function(req,res){
     });
     });
         
+});
+//ahora si las tablas de productos y pedidos en el admin
+app.get('/api/admin/pedidos/recientes', function(req, res){
+    var sql = 'SELECT PI.id_pedido, C.nombre_completo, PI.estado, PI.estado_pago FROM PEDIDO_INDIVIDUAL PI JOIN CAMPESINO C ON PI.cedula_campesino = C.cedula ORDER BY PI.fecha_pedido DESC LIMIT 5';
+
+    db.query(sql, function(err, resultado){
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});// cargar categorias y proveedores para los selects
+app.get('/api/admin/categorias', function(req, res) {
+    db.query('SELECT * FROM CATEGORIA_PRODUCTO', function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+app.get('/api/admin/proveedores', function(req, res) {
+    db.query('SELECT * FROM PROVEEDOR WHERE estado = "activo"', function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+// agregar producto
+app.post('/api/admin/producto', function(req, res) {
+    var nombre = req.body.nombre;
+    var precio = req.body.precio;
+    var unidad = req.body.unidad;
+    var cantMin = req.body.cantMin;
+    var id_categoria = req.body.id_categoria;
+    var id_proveedor = req.body.id_proveedor;
+
+    var sql = 'INSERT INTO PRODUCTO (nombre, precio_actual, unidad_medida, cantidad_min_compra, id_categoria, id_proveedor) VALUES (?,?,?,?,?,?)';
+    db.query(sql, [nombre, precio, unidad, cantMin, id_categoria, id_proveedor], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Producto agregado exitosamente'});
+    });
+});
+
+// listar productos
+app.get('/api/admin/productos', function(req, res) {
+    var sql = 'SELECT P.id_producto, P.nombre, P.precio_actual, P.unidad_medida, C.nombre as categoria, PR.razon_social as proveedor FROM PRODUCTO P JOIN CATEGORIA_PRODUCTO C ON P.id_categoria = C.id_categoria JOIN PROVEEDOR PR ON P.id_proveedor = PR.id_proveedor';
+    db.query(sql, function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
 });
 app.listen(3000, function() {
     console.log('Servidor corriendo en puerto 3000');
