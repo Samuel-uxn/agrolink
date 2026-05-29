@@ -100,10 +100,88 @@
     
     </div>
         
-    <div id="proveedores" style="display:none"><h1>Proveedores</h1></div>
-    <div id="pedidos" style="display:none"><h1>Pedidos</h1></div>
-    <div id="inventario" style="display:none"><h1>Inventario</h1></div>
-    <div id="municipios" style="display:none"><h1>Municipios</h1></div>
+    <div id="proveedores" style="display:none"><h1>Proveedores</h1>
+            <div class="seccion">
+            <h3>Agregar proveedor</h3>
+            <input type="text" id="razonSocial" placeholder="Razón social">
+            <input type="text" id="nitRut" placeholder="NIT/RUT">
+            <input type="text" id="telefonoProveedor" placeholder="Teléfono">
+            <input type="email" id="emailProveedor" placeholder="Email">
+            <input type="date" id="fechaContrato">
+            <select id="municipioProveedor">
+                <option value="">Seleccione municipio</option>
+                <option value="1">Fusagasugá</option>
+                <option value="2">Arbeláez</option>
+                <option value="3">Silvania</option>
+                <option value="4">Tunja</option>
+                <option value="5">Duitama</option>
+                <option value="6">Sogamoso</option>
+            </select>
+            <button id="btnAgregarProveedor">Agregar proveedor</button>
+        </div>
+
+        <div class="seccion">
+            <h3>Lista de proveedores</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Razón social</th>
+                    <th>NIT</th>
+                    <th>Teléfono</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+                <tbody id="tablaProveedores"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="pedidos" style="display:none"><h1>Pedidos</h1>
+
+    <div class="seccion">
+        <h3>Lista de pedidos</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Campesino</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                </tr>
+                <tbody id="tablaPedidosAdmin"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="inventario" style="display:none"><h1>Inventario</h1>
+        <div class="seccion">
+            <h3>Stock en bodega</h3>
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Stock actual</th>
+                    <th>Stock mínimo</th>
+                    <th>Actualizar stock</th>
+                </tr>
+                <tbody id="tablaInventario"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="municipios" style="display:none"><h1>Municipios</h1>
+        <div class="seccion">
+        <h3>Lista de municipios</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Municipio</th>
+                <th>Departamento</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+            <tbody id="tablaMunicipios"></tbody>
+        </table>
+    </div>
+    </div>
 </div>
 <script src="../script/script.js"></script>
 </body>

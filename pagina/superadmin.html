@@ -3,9 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../estilos/estiloCampesino.css">
+    <title>Superadmin - AgroLink</title>
 </head>
 <body>
-    <h1>Pagina del superadmin</h1>
+<div class="sidebar">
+    <h2>AgroLink Superadmin</h2>
+    <a href="#" onclick="mostrarSeccion('panel')">Panel</a>
+    <a href="#" onclick="mostrarSeccion('productos')">Productos</a>
+    <a href="#" onclick="mostrarSeccion('proveedores')">Proveedores</a>
+    <a href="#" onclick="mostrarSeccion('pedidos')">Pedidos</a>
+    <a href="#" onclick="mostrarSeccion('inventario')">Inventario</a>
+    <a href="#" onclick="mostrarSeccion('municipios')">Municipios</a>
+    <a href="#" onclick="mostrarSeccion('queryRunner')">Consultas</a>
+    <a href="/pagina/index.html">Cerrar sesión</a>
+</div>
+<div class="main">
+    <div id="panel">
+        <h1>Panel</h1>
+        <div class="cartaPanel">
+            <div class="carta">
+                <p class="numero" id="totalProductos">0</p>
+                <p class="etiqueta">Productos Activos</p>
+            </div>
+            <div class="carta">
+                <p class="numero" id="totalPedidos">0</p>
+                <p class="etiqueta">Pedidos pendientes</p>
+            </div>
+            <div class="carta">
+                <p class="numero" id="totalProveedores">0</p>
+                <p class="etiqueta">Proveedores Activos</p>
+            </div>
+            <div class="carta">
+                <p class="numero" id="stockBajo">0</p>
+                <p class="etiqueta">Stock bajo</p>
+            </div>
+        </div>
+        <div class="seccion">
+            <h3>Pedidos Recientes</h3>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Campesino</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                </tr>
+                <tbody id="tablaPedidos"></tbody>
+            </table>
+        </div>
+        <div class="seccion">
+            <h3>Productos con Stock Bajo</h3>
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Stock Actual</th>
+                    <th>Stock Mínimo</th>
+                    <th>Proveedor</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="productos" style="display:none">
+        <h1>Productos</h1>
+        <div class="seccion">
+            <h3>Agregar producto</h3>
+            <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+            <input type="number" id="precioProducto" placeholder="Precio">
+            <input type="text" id="unidadProducto" placeholder="Unidad de medida (kg, litro...)">
+            <input type="number" id="cantMinProducto" placeholder="Cantidad mínima de compra">
+            <select id="categoriaProducto">
+                <option value="">Seleccione categoría</option>
+            </select>
+            <select id="proveedorProducto">
+                <option value="">Seleccione proveedor</option>
+            </select>
+            <button id="btnAgregarProducto">Agregar producto</button>
+        </div>
+        <div class="seccion">
+            <h3>Lista de productos</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Unidad</th>
+                    <th>Categoría</th>
+                    <th>Proveedor</th>
+                </tr>
+                <tbody id="tablaProductos"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="proveedores" style="display:none">
+        <h1>Proveedores</h1>
+        <div class="seccion">
+            <h3>Agregar proveedor</h3>
+            <input type="text" id="razonSocial" placeholder="Razón social">
+            <input type="text" id="nitRut" placeholder="NIT/RUT">
+            <input type="text" id="telefonoProveedor" placeholder="Teléfono">
+            <input type="email" id="emailProveedor" placeholder="Email">
+            <input type="date" id="fechaContrato">
+            <select id="municipioProveedor">
+                <option value="">Seleccione municipio</option>
+                <option value="1">Fusagasugá</option>
+                <option value="2">Arbeláez</option>
+                <option value="3">Silvania</option>
+                <option value="4">Tunja</option>
+                <option value="5">Duitama</option>
+                <option value="6">Sogamoso</option>
+            </select>
+            <button id="btnAgregarProveedor">Agregar proveedor</button>
+        </div>
+        <div class="seccion">
+            <h3>Lista de proveedores</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Razón social</th>
+                    <th>NIT</th>
+                    <th>Teléfono</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+                <tbody id="tablaProveedores"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="pedidos" style="display:none">
+        <h1>Pedidos</h1>
+        <div class="seccion">
+            <h3>Lista de pedidos</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Campesino</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Pago</th>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                </tr>
+                <tbody id="tablaPedidosAdmin"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="inventario" style="display:none">
+        <h1>Inventario</h1>
+        <div class="seccion">
+            <h3>Stock en bodega</h3>
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Stock actual</th>
+                    <th>Stock mínimo</th>
+                    <th>Actualizar stock</th>
+                </tr>
+                <tbody id="tablaInventario"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="municipios" style="display:none">
+        <h1>Municipios</h1>
+        <div class="seccion">
+            <h3>Lista de municipios</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Municipio</th>
+                    <th>Departamento</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+                <tbody id="tablaMunicipios"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="queryRunner" style="display:none">
+        <h1>Seccion de Consultas</h1>
+        <div class="seccion">
+            <h3>Ejecutar consulta SQL</h3>
+            <textarea id="queryInput" rows="6" style="width:100%;font-family:monospace" placeholder="SELECT * FROM CAMPESINO"></textarea>
+            <button id="btnEjecutar">Ejecutar</button>
+        </div>
+        <div class="seccion">
+            <h3>Resultado</h3>
+            <div id="queryResultado"></div>
+        </div>
+    </div>
+
+</div>
+<script src="../script/script.js"></script>
 </body>
 </html>

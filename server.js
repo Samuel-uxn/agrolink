@@ -161,6 +161,109 @@ app.get('/api/admin/productos', function(req, res) {
         res.json(resultado);
     });
 });
+
+// agregar proveedor
+app.post('/api/admin/proveedor', function(req, res) {
+    var razonSocial = req.body.razonSocial;
+    var nitRut = req.body.nitRut;
+    var telefono = req.body.telefono;
+    var email = req.body.email;
+    var fechaContrato = req.body.fechaContrato;
+    var id_municipio = req.body.id_municipio;
+
+    var sql = 'INSERT INTO PROVEEDOR (razon_social, nit_rut, telefono, email, fecha_contrato, id_municipio) VALUES (?,?,?,?,?,?)';
+    db.query(sql, [razonSocial, nitRut, telefono, email, fechaContrato, id_municipio], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Proveedor agregado exitosamente'});
+    });
+});
+
+// listar proveedores
+app.get('/api/admin/proveedores/lista', function(req, res) {
+    db.query('SELECT * FROM PROVEEDOR', function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+// activar o desactivar proveedor
+app.post('/api/admin/proveedor/estado', function(req, res) {
+    var id_proveedor = req.body.id_proveedor;
+    var estado = req.body.estado;
+
+    db.query('UPDATE PROVEEDOR SET estado = ? WHERE id_proveedor = ?', [estado, id_proveedor], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Estado actualizado'});
+    });
+});
+
+// listar todos los pedidos
+app.get('/api/admin/pedidos', function(req, res) {
+    var sql = 'SELECT PI.id_pedido, C.nombre_completo, PI.direccion_entrega, PI.estado, PI.estado_pago, PI.fecha_pedido FROM PEDIDO_INDIVIDUAL PI JOIN CAMPESINO C ON PI.cedula_campesino = C.cedula ORDER BY PI.fecha_pedido DESC';
+    db.query(sql, function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+// cambiar estado del pedido
+app.post('/api/admin/pedido/estado', function(req, res) {
+    var id_pedido = req.body.id_pedido;
+    var nuevoEstado = req.body.estado;
+
+    db.query('UPDATE PEDIDO_INDIVIDUAL SET estado = ? WHERE id_pedido = ?', [nuevoEstado, id_pedido], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Estado del pedido actualizado'});
+    });
+});
+// listar inventario
+app.get('/api/admin/inventario', function(req, res) {
+    var sql = 'SELECT P.nombre, IB.stock, IB.stock_minimo, IB.id_producto, IB.id_bodega FROM INVENTARIO_BODEGA IB JOIN PRODUCTO P ON IB.id_producto = P.id_producto';
+    db.query(sql, function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+// actualizar stock
+app.post('/api/admin/inventario/actualizar', function(req, res) {
+    var id_producto = req.body.id_producto;
+    var id_bodega = req.body.id_bodega;
+    var nuevoStock = req.body.stock;
+
+    db.query('UPDATE INVENTARIO_BODEGA SET stock = ? WHERE id_producto = ? AND id_bodega = ?', [nuevoStock, id_producto, id_bodega], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Stock actualizado'});
+    });
+});
+// listar municipios
+app.get('/api/admin/municipios', function(req, res) {
+    var sql = 'SELECT M.id_municipio, M.nombre, D.nombre as departamento, M.habilitado FROM MUNICIPIO M JOIN DEPARTAMENTO D ON M.id_departamento = D.id_departamento';
+    db.query(sql, function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json(resultado);
+    });
+});
+
+// habilitar o deshabilitar municipio
+app.post('/api/admin/municipio/estado', function(req, res) {
+    var id_municipio = req.body.id_municipio;
+    var habilitado = req.body.habilitado;
+
+    db.query('UPDATE MUNICIPIO SET habilitado = ? WHERE id_municipio = ?', [habilitado, id_municipio], function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({mensaje: 'Municipio actualizado'});
+    });
+});
+// query runner del superadmin
+app.post('/api/superadmin/query', function(req, res) {
+    var query = req.body.query;
+
+    db.query(query, function(err, resultado) {
+        if(err) return res.json({error: err.message});
+        res.json({resultado: resultado});
+    });
+});
 app.listen(3000, function() {
     console.log('Servidor corriendo en puerto 3000');
     console.log('Abre: http://localhost:3000/pagina/index.html');
